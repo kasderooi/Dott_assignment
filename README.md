@@ -31,7 +31,20 @@ Output
 
 ```shell
 git clone https://github.com/kasderooi/Dott_assignment.git
+```
+
+> cpp implementation:
+
+```shell
 cd Dott_assignment/cpp_implementation
 make
+./test.sh
+```
+
+> ts implementation:
+
+```shell
+cd Dott_assignment/ts_implementation
+tsc --project tsconfig.json
 ./test.sh
 ```
