@@ -45,6 +45,8 @@ make
 
 ```shell
 cd Dott_assignment/ts_implementation
+npm install readline
+npm install process
 tsc --project tsconfig.json
 ./test.sh
 ```
