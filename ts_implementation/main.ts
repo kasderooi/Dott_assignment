@@ -3,9 +3,7 @@ import { stdin as input, stdout as output } from 'process';
 
 const rl = readline.createInterface({ input, output });
 
-const answer = async () => {
-	await rl.question('What do you think of Node.js? ');
-};
+const answer rl.question('What do you think of Node.js? ');
 
 console.log(`Thank you for your valuable feedback: ${answer}`);
 
