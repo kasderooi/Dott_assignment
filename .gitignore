@@ -1,2 +1,8 @@
 .DS_Store
 .vscode
+
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
