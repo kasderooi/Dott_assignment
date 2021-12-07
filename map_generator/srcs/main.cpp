@@ -23,6 +23,6 @@ int	main( void ) {
 	// }
 	// ret_map = calculate_whitespace( &input_map );
 	// print_map( &ret_map );
-	std::cout << t_cases << std::endl << line << std::endl; //<< test_map << std::endl;
+	std::cout << t_cases << std::endl << line << std::endl << test_map <<std::endl; //<< test_map << std::endl;
 	return (0);
 }

@@ -5,13 +5,19 @@ export class Map {
 	private _y: number;
 	private _map: number[][];
 	
-	constructor( x, y ) {
+	constructor( line: string ) {
+		const split = line.split(" ");
+		const x = Number ( split[0] );
+		const y = Number ( split[1] );
+
+		if ( x < 1 || x > 182 || y < 1 || y > 182 )
+			throw Error("Input error");
 		this._x = x;
 		this._y = y;
 		this._map = [];
-		for ( let i = 0; i <= x; i++ ) {
+		for ( let i = 0; i <= this._x; i++ ) {
 			this._map[i] = [];
-			for ( let j = 0; j <= y; j++) {
+			for ( let j = 0; j <= this._y; j++) {
 				this._map[i][j] = 0;
 			}
 		}
@@ -23,17 +29,11 @@ export class Map {
 	get_y() {
 		return this._y;
 	}
-	set_x( x ) {
-		this._x = x;
-	}
-	set_y( y ) {
-		this._y = y;
-	}
 	set_point( x, y, value ) {
 		this._map[x][y] = value;
 	}
 	get_point( x, y ) : number {
-		var ret: number = this._map[x][y] as number;
+		let ret: number = this._map[x][y] as number;
 		return ret;
 	}
 	print_map() {
@@ -46,8 +46,8 @@ export class Map {
 		}
 	}
 	calculate_distance( input_map: Map ) {
-		var distance, horizontal, vertical;
-		var x = 0;
+		let distance, horizontal, vertical;
+		let x = 0;
 		for (let x = 0; x < input_map.get_x(); x++) {
 			for (let y = 0; y <= input_map.get_y() - 1; y++) {
 				horizontal = space_horizontal( input_map, x, y );
@@ -61,7 +61,7 @@ export class Map {
 }
 
 function space_vertical( map: Map, x, y ) {
-	var buf = map.get_y();
+	let buf = map.get_y();
 
 	if ( map.get_point( x, y ) == 1 )
 		return 0;
@@ -77,7 +77,7 @@ function space_vertical( map: Map, x, y ) {
 }
 
 function space_horizontal( map: Map, x, y ) {
-	var buf = map.get_x();
+	let buf = map.get_x();
 
 	if ( map.get_point( x, y ) == 1 )
 		return 0;
