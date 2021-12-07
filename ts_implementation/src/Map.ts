@@ -1,5 +1,3 @@
-import { stdin, stdout } from 'process';
-
 export class Map {
 	private _x: number;
 	private _y: number;
@@ -7,11 +5,9 @@ export class Map {
 	
 	constructor( line: string ) {
 		const split = line.split(" ");
-		const x = Number ( split[0] );
-		const y = Number ( split[1] );
+		const x = input_check( split[0], 1, 182 );
+		const y = input_check( split[1], 1, 182 );
 
-		if ( x < 1 || x > 182 || y < 1 || y > 182 )
-			throw Error("Mapsize error: x/y is smaller than 1 or bigger 182");
 		this._x = x;
 		this._y = y;
 		this._map = [];
@@ -30,9 +26,7 @@ export class Map {
 		return this._y;
 	}
 	set_point( x, y, value ) {
-		if (value != 0 && value != 1 && y >= this._y)
-			throw Error("Map error: value is not 0 or 1");
-		this._map[x][y] = value;
+		this._map[x][y] = input_check( value, 0, 0 );
 	}
 	get_point( x, y ) : number {
 		let ret: number = this._map[x][y] as number;
@@ -60,6 +54,18 @@ export class Map {
 		}
 	}
 
+}
+
+export function input_check( value, min, max ) : number {
+	if (isNaN(value))
+		throw Error("Input error: not a number");
+	if (min && value < min)
+		throw Error("Input error: value to low");
+	if (min && value > max)
+		throw Error("Input error: value to high");
+	if (!min && !max && (value < 0 || value > 1))
+		throw Error("Input error: value is not 0 or 1");
+	return Number( value );
 }
 
 function space_vertical( map: Map, x, y ) {

@@ -1,6 +1,6 @@
 import * as readline from 'readline';
 import { stdin as input } from 'process';
-import { Map } from "./Map";
+import { Map, input_check } from "./Map";
 
 const rl = readline.createInterface( input );
 
@@ -24,13 +24,10 @@ function input_to_map( i, line: string, subject: Map ) {
 }
 
 const main = async () => {
-	let nbroftest =	Number ( await read_line() );
-	console.log( nbroftest );
-
-	let map_array: Map[] = [];
-	let output_array: Map[] = [];
-
 	try {
+		let nbroftest =	input_check( await read_line(), 1, 1000 );
+		let map_array: Map[] = [];
+		let output_array: Map[] = [];
 		for ( let test = 0; test < nbroftest; test++ ) {
 			let	line: string  = await read_line() as string;
 			map_array[test] = new Map( line );
@@ -46,6 +43,6 @@ const main = async () => {
 	} catch ( error ) {
 		console.log( error.message );
 	}
-	rl.close();
+	// rl.close();
 }
 main()
