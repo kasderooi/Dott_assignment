@@ -32,9 +32,11 @@ const main = async () => {
 		var split = line.split(" ");
 		var x = Number ( split[0] );
 		var y = Number ( split[1] );
+		console.log(x, y);
+
 		map_array[test] = new Map( x, y );
 		output_array[test] = new Map( x, y );
-		output_array[test].print_map();
+		// output_array[test].print_map();
 		for ( let i = 0; i < map_array[test].get_x(); i++ ) {
 			line = await read_line() as string;
 			input_to_map( i, line, map_array[test] );
