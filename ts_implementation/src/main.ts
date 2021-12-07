@@ -16,7 +16,7 @@ function input_to_map( i, line: string, subject: Map ) {
 	let split;
 
 	if ( line.length != subject.get_y() )
-		throw Error("Map error");
+		throw Error("Map error: more bits than mapsize");
 	split = line.split("", subject.get_x());
 	for ( let j = 0; j < subject.get_y(); j++ ) {
 		subject.set_point( i, j, line[j] );
@@ -48,5 +48,4 @@ const main = async () => {
 	}
 	rl.close()
 }
-
 main()

@@ -11,7 +11,7 @@ export class Map {
 		const y = Number ( split[1] );
 
 		if ( x < 1 || x > 182 || y < 1 || y > 182 )
-			throw Error("Input error");
+			throw Error("Mapsize error: x/y is smaller than 1 or bigger 182");
 		this._x = x;
 		this._y = y;
 		this._map = [];
@@ -30,6 +30,8 @@ export class Map {
 		return this._y;
 	}
 	set_point( x, y, value ) {
+		if (value != 0 && value != 1 && y >= this._y)
+			throw Error("Map error: value is not 0 or 1");
 		this._map[x][y] = value;
 	}
 	get_point( x, y ) : number {
@@ -65,13 +67,13 @@ function space_vertical( map: Map, x, y ) {
 
 	if ( map.get_point( x, y ) == 1 )
 		return 0;
-	for ( let y_i = 0; y_i < map.get_y(); y_i++ ) {
-		if ( y_i < y && map.get_point( x, y_i ) == 1  && buf > y - y_i )
-			buf = y - y_i;
-		if ( y_i == y)
-			y_i++;
-		if ( y_i > y && map.get_point( x, y_i ) == 1  && buf > y_i - y )
-			buf = y_i - y;
+	for ( let i = 0; i < map.get_y(); i++ ) {
+		if ( i < y && map.get_point( x, i ) == 1  && buf > y - i )
+			buf = y - i;
+		if ( i == y)
+			i++;
+		if ( i > y && map.get_point( x, i ) == 1  && buf > i - y )
+			buf = i - y;
 	}
 	return buf;
 }
@@ -81,13 +83,13 @@ function space_horizontal( map: Map, x, y ) {
 
 	if ( map.get_point( x, y ) == 1 )
 		return 0;
-	for ( let x_i = 0; x_i < map.get_x(); x_i++ ) {
-		if ( x_i < x && map.get_point( x_i, y ) == 1  && buf > (x - x_i) )
-			buf = x - x_i;
-		if ( x_i == x )
-			x_i++;
-		if ( x_i > x && map.get_point( x_i, y ) == 1  && buf > (x_i - x) )
-			buf = x_i - x;
+	for ( let i = 0; i < map.get_x(); i++ ) {
+		if ( i < x && map.get_point( i, y ) == 1  && buf > (x - i) )
+			buf = x - i;
+		if ( i == x )
+			i++;
+		if ( i > x && map.get_point( i, y ) == 1  && buf > (i - x) )
+			buf = i - x;
 	}
 	return buf;
 }
