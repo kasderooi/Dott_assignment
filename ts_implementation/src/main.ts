@@ -1,12 +1,12 @@
 import * as readline from 'readline';
-import { stdin as input, stdout as output } from 'process';
+import { stdin as input } from 'process';
 import { Map } from "./Map";
 
-const rl = readline.createInterface({ input, output });
+const rl = readline.createInterface( input );
 
 const read_line  = ( ) => {
 	return new Promise((resolve) => {
-		rl.question('', (answer) => {
+		rl.on('line', (answer) => {
 		resolve(answer)
 		})
 	})
@@ -16,7 +16,7 @@ function input_to_map( i, line: string, subject: Map ) {
 	let split;
 
 	if ( line.length != subject.get_y() )
-		throw Error("Map error: more bits than mapsize");
+		throw Error("Map error: amount of bits differ from mapsize");
 	split = line.split("", subject.get_x());
 	for ( let j = 0; j < subject.get_y(); j++ ) {
 		subject.set_point( i, j, line[j] );
@@ -25,6 +25,8 @@ function input_to_map( i, line: string, subject: Map ) {
 
 const main = async () => {
 	let nbroftest =	Number ( await read_line() );
+	console.log( nbroftest );
+
 	let map_array: Map[] = [];
 	let output_array: Map[] = [];
 
@@ -38,14 +40,12 @@ const main = async () => {
 				input_to_map( i, line, map_array[test] );
 			}
 			output_array[test].calculate_distance( map_array[test] );
-		}
-		for ( let i = 0; i < nbroftest; i++) {
-			console.log( "\ntest: ", i + 1 );
-			output_array[i].print_map();
+			console.log( "\ntest: ", test + 1 );
+			output_array[test].print_map();
 		}
 	} catch ( error ) {
 		console.log( error.message );
 	}
-	rl.close()
+	rl.close();
 }
 main()
