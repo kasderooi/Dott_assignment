@@ -31,12 +31,7 @@ Output
 
 ```shell
 git clone https://github.com/kasderooi/Dott_assignment.git
-```
-
-> ts implementation:
-
-```shell
-cd Dott_assignment/ts_implementation
-
-./test.sh
+cd Dott_assignment
+./init.sh
+./test.sh {nbr of tests} {maximum map size}
 ```
