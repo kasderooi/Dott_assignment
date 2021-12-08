@@ -54,8 +54,6 @@ export class Map {
 	}
 
 	calculate_distance( input_map: Map ) {
-		let distance, horizontal, vertical;
-		let i = 0;
 		for (let i = 0; i < input_map.get_i(); i++) {
 			for (let j = 0; j <= input_map.get_j() - 1; j++) {
 				if ( input_map.get_point( i, j ) == 1 ) {
