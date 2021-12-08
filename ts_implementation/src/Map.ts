@@ -39,7 +39,7 @@ export class Map {
 		for ( let i = 0; i < this._i; i++ ) {
 			for ( let j = 0; j < this._j; j++ ) {
 				process.stdout.write( String( this._map[i][j] ) );
-				process.stdout.write( String( "\t" ) );
+				process.stdout.write( String( " " ) );
 			}
 			process.stdout.write( "\n" );
 		}
