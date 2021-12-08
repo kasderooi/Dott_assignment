@@ -33,21 +33,10 @@ Output
 git clone https://github.com/kasderooi/Dott_assignment.git
 ```
 
-> cpp implementation:
-
-```shell
-cd Dott_assignment/cpp_implementation
-make
-./test.sh
-```
-
 > ts implementation:
 
 ```shell
 cd Dott_assignment/ts_implementation
-npm install readline
-npm install process
-npm i --save-dev @types/node
-tsc --project tsconfig.json
+
 ./test.sh
 ```
