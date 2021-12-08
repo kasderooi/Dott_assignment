@@ -13,10 +13,11 @@ function map_generator() {
 		let x = get_random( max_size ) + 1;
 		let y = get_random( max_size ) + 1;
 		console.log( x, y );
-		for ( let i = 0; i < x; i++ )
+		for ( let i = 0; i < x; i++ ) {
 			for ( let j = 0; j < y; j++ )
 				process.stdout.write( String( get_random( 2 ) ) );
 			process.stdout.write( "\n" );
+		}
 	}
 	
 }
