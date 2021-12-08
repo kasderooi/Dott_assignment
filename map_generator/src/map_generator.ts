@@ -19,6 +19,5 @@ function map_generator() {
 			process.stdout.write( "\n" );
 		}
 	}
-	
 }
 map_generator()
