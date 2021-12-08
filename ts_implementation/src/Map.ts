@@ -1,5 +1,3 @@
-import { get } from "https";
-
 export class Map {
 	private _i: number;
 	private _j: number;
