@@ -2,27 +2,27 @@
 #include "utils.hpp"
 #include <string>
 
-int	main( void ) {
+int	main( int argc, char** argv ) {
 	std::string		line;
 	std::string		test_map = "0001\n0011\n0110";
-	// Map				input_map;
-	// Map				ret_map;
-	int				t_cases = 0;
-	// int				line_count = 0;
+	int				t_cases, max_size, x, y;
 
-	t_cases = 1;
-	line = "3 4";
-	// if ( string_to_map( line, &input_map ) )
-	// 	return 2;
-	// input_map.generate_map();
-	// while ( line_count < input_map.get_x() ) {
-	// 	getline( std::cin, line );
-	// 	if ( set_line( line, &input_map ) )
-	// 		return 1;
-	// 	line_count++;
-	// }
-	// ret_map = calculate_whitespace( &input_map );
-	// print_map( &ret_map );
-	std::cout << t_cases << std::endl << line << std::endl << test_map <<std::endl; //<< test_map << std::endl;
-	return (0);
+	if ( argc != 3 )
+		return 1;
+	t_cases = std::stoi( argv[1] );
+	max_size = std::stoi( argv[2] );
+	std::cout << t_cases << std::endl;
+	for (int t = 0; t < t_cases; t++)
+	{
+		x = ( arc4random() % max_size ) + 1;
+		y = ( arc4random() % max_size ) + 1;
+		std::cout << x << " " << y << std::endl;
+		for ( int i = 0; i < x; i++ ) {
+			for ( int j = 0; j < y; j++ ) {
+				std::cout << arc4random() % 2;
+			}
+			std::cout << std::endl;
+		}
+	}
+	return 0;
 }

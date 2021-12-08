@@ -1,6 +1,6 @@
 NAME		=	map_generator
 SRCDIR		=	srcs
-SRCS		=	main.cpp Map.cpp utils.cpp
+SRCS		=	main.cpp
 OBJDIR		=	objs
 OBJS		=	$(addprefix $(OBJDIR)/, $(SRCS:.cpp=.o))
 CC			=	clang++
