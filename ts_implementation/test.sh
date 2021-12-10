@@ -2,4 +2,4 @@
 # cat test_cases | node ts_implementation/dist/main.js
 echo " hoi
 doei
-bla" | node ts_implementation/dist/main.js
+bla" | node dist/main.js
