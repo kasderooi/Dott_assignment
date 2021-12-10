@@ -1,51 +1,53 @@
-const fs = require('fs');
-const readline = require('readline');
+import * as readline from 'readline';
+import { stdin as input } from 'process';
 import { Map, input_check } from "./Map";
 
-async function read_by_line(): Promise<string[]> {
-	const filestream = fs.createReadStream( '/dev/stdin' );
-	const rl = readline.createInterface({ input: filestream, crlfDelay: Infinity });
-	let ret: string[] = [];
-	for await (const line of rl ) {
-		ret.push(line);
-	}
-	return ret;
-}
+const rl = readline.createInterface({ input })
 
 function input_to_map( i, line: string, subject: Map ) {
-	let split;
-
+	let split
 	if ( line.length != subject.get_j() )
-		throw Error("Map error: amount of bits differ from mapsize");
-	split = line.split("", subject.get_i());
+		throw Error("Map error: amount of bits differ from mapsize")
+	split = line.split("", subject.get_i())
 	for ( let j = 0; j < subject.get_j(); j++ ) {
-		subject.set_point( i, j, input_check( line[j], 0, 0 ) );
+		subject.set_point( i, j, input_check( line[j], 0, 0 ) )
 	}
+}
+
+function resolve_data( input_map: Map, output_map: Map, line_index ) {
+	output_map.calculate_distance( input_map )
+	output_map.print_map()
+	line_index = -1
+}
+
+function init_maps( input_map: Map, output_map: Map, line_index, line: string ) {
+	input_map = new Map( line )
+	output_map = new Map( line )
+	line_index = 0
 }
 
 const main = async () => {
-	let infile = await read_by_line();
-	let	line_index = 0;
+	let nbr_test, line_index = -1
+	let input_map: Map, output_map: Map
 	try {
-		let nbroftest =	Number( infile[line_index++] );
-		input_check( 1, 1000, Math.round( nbroftest ) );
-		let map_array: Map[] = [];
-		let output_array: Map[] = [];
-		for ( let test = 0; test < nbroftest; test++ ) {
-			let	line: string  = infile[line_index++];
-			map_array[test] = new Map( line );
-			output_array[test] = new Map( line );
-			for ( let i = 0; i < map_array[test].get_i(); i++ ) {
-				line = infile[line_index++];
-				input_to_map( i, line, map_array[test] );
+		for await ( const line of rl ) {
+			if ( !nbr_test ) {
+				nbr_test = input_check( 1, 1000, Number( line ) )
+			} else if ( line_index == -1 ) {
+				input_map = new Map( line )
+				output_map = new Map( line )
+				line_index = 0// init_maps( input_map, output_map, line_index, line )
+			} else if ( line_index < input_map.get_i() ) {
+				input_to_map( line_index++, line, input_map )
+				if ( line_index == input_map.get_i() ) {
+					resolve_data( input_map, output_map, line_index )
+					if ( !nbr_test-- )
+						break ;
+				}
 			}
-			output_array[test].calculate_distance( map_array[test] );
-			console.log( "\ntest: ", test + 1 );
-			output_array[test].print_map();
 		}
-	} catch ( error ) {
-		console.log( error.message );
+	} catch ( error) {
+		console.log( error )
 	}
-	
 }
 main()
