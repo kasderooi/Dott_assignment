@@ -13,7 +13,8 @@ function input_to_map( y, line: string, subject: Map ) {
 		subject.set_point( y, x, input_check( Number( split[x] ), 0, 0 ) )
 }
 
-function resolve_data( input_map: Map, output_map: Map ) : number {
+function resolve_data( input_map: Map ) : number {
+	let output_map: Map
 	output_map = new Map( input_map.get_height(), input_map.get_width() )
 	output_map.calculate_distance( input_map )
 	output_map.print_map()
@@ -29,7 +30,7 @@ function init_maps( line: string ) : Map {
 
 const main = async () => {
 	let nbr_test = 0, line_index = -1
-	let input_map: Map, output_map: Map
+	let input_map: Map
 	try {
 		for await ( const line of rl ) {
 			if ( !nbr_test ) {
@@ -40,7 +41,7 @@ const main = async () => {
 			} else if ( line_index < input_map.get_height() ) {
 				input_to_map( line_index++, line, input_map )
 				if ( line_index == input_map.get_height() ) {
-					line_index = resolve_data( input_map, output_map )
+					line_index = resolve_data( input_map )
 					if ( !--nbr_test )
 						process.exit(0)
 				}
